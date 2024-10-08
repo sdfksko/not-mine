@@ -1,0 +1,95 @@
+<header>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/12d13cde63.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="/js/header.js"></script>
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-content">
+                <div class="header-inner">
+                    <!-- 로고 -->
+                    <div class="logo">
+                        <a href="/nestco">
+                            <img src="/images/logo3.svg" alt="NestCo Logo">
+                        </a>
+                    </div>
+                    <div class="category">
+                        <!-- 카테고리 버튼 -->
+                        <button id="category-btn" class="category-btn">
+                            <i class="fas fa-bars"></i>&ensp;카테고리
+                        </button>
+                        <aside id="side-bar" class="side-bar">
+                            <ul id="parentCategoryList">
+                                {{#categories}}
+                                    <li data-id="{{id}}" class="parent-category">
+                                        <i class="{{icon}}"></i> {{name}}
+                                        <ul class="middle-category">
+                                            {{#subCategories}}
+                                                <li data-id="{{id}}" class="middle-category-item">{{name}}
+                                                    <ul class="child-category" >
+                                                        {{#subCategories}}
+                                                            <li data-id="{{id}}" class="child-category-item">{{name}}</li>
+                                                        {{/subCategories}}
+                                                    </ul>
+                                                </li>
+                                            {{/subCategories}}
+                                        </ul>
+                                    </li>
+                                {{/categories}}
+                            </ul>
+                        </aside>
+                    </div>
+
+                    <!-- 검색창 -->
+                    <div class="search-form">
+                        <form id="headerSearchForm" action="/nestco" method="get">
+                            <input id="search" type="search"  name="searchQuery" placeholder="검색어를 입력해주세요" />
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+
+                    <!-- 메뉴 아이콘들 -->
+                    <div class="icon-menus">
+                        <button class="item-register" onclick="saveReq()"><i class="fas fa-box-open"></i>&ensp;물품 등록</button>
+                        <button class="like-items"><i class="fas fa-heart"></i>&ensp;찜한 물품</button>
+                        <button class="notice"><i class="fas fa-bell"></i>&ensp;알림
+                            <span class="notification-badge">1</span>
+                        </button>
+                        {{#nickname}} <!-- 로그인된 경우 -->
+                            <div class="dropdown">
+                                <button id="userDropdown" class="dropbtn">{{nickname}}</button>
+                                <div class="dropdown-content">
+                                    <a href="/myPage">마이페이지</a>
+                                    <a href="/logout">로그아웃</a>
+                                </div>
+                            </div>
+                        {{/nickname}}
+                        {{^nickname}} <!-- 비로그인 상태일 때 -->
+                            <button class="loginForm" onclick="loginReq()">
+                                <i class="fas fa-user"></i>&ensp;로그인
+                            </button>
+                        {{/nickname}}
+                    </div>
+                </div>
+
+                <!-- 하단 서브 메뉴 -->
+                <div class="header-bottom">
+                    <div class="header-location">
+                        <i class="fas fa-map-marker-alt"></i>&ensp;경기도 수원시
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a href="#">물품 둘러보기</a></li>
+                        <li><a href="#">자유게시판</a></li>
+                        <li><a href="#">고객센터</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

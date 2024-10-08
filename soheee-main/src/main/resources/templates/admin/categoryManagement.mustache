@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>카테고리 관리</title>
+    <style>
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+{{> admin/adminHeader}}
+<br>
+<h1 class="mb-4">카테고리 관리</h1>
+
+<!-- 상단 필터 및 버튼 -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex align-items-center">
+        <label for="parentCategorySelect" class="form-label me-2">카테고리 관리</label>
+        <select id="parentCategorySelect" class="form-select me-2" style="width: 250px;" onchange="filterCategories()">
+            <option value="">전체 카테고리</option>
+            {{#topCategories}}
+                <option value="{{id}}">{{name}}</option>
+            {{/topCategories}}
+        </select>
+        <button class="btn btn-secondary" onclick="filterCategories()">검색</button>
+    </div>
+    <div>
+        <button class="btn btn-primary" onclick="location.href='/admin/categories/add'">카테고리 생성</button>
+    </div>
+</div>
+
+<!-- 카테고리 목록 테이블 -->
+<table class="table table-striped" id="categoryTable">
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>대분류</th>
+        <th>중분류</th>
+        <th>소분류</th>
+        <th>노출 여부</th>
+        <th>순서</th>
+        <th>액션</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#categoryTree}}
+        <!-- 대분류 -->
+        <tr class="category-row" data-category="top" data-id="{{id}}"  data-parent-id="">
+            <td>{{id}}</td>
+            <td>{{name}}</td> <!-- 대분류 이름 -->
+            <td></td> <!-- 중분류 빈 셀 -->
+            <td></td> <!-- 소분류 빈 셀 -->
+            <td>{{#isDisable}}<span class="badge bg-danger">No</span>{{/isDisable}}{{^isDisable}}<span class="badge bg-success">Yes</span>{{/isDisable}}</td>
+            <td>{{displayOrder}}</td>
+            <td>
+                <a href="/admin/categories/edit/{{id}}" class="btn btn-warning btn-sm">수정</a>
+                <form action="/admin/categories/delete/{{id}}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                </form>
+            </td>
+        </tr>
+
+        <!-- 중분류 -->
+        {{#children}}
+            <tr class="category-row" data-category="middle" data-parent-id="{{parentId}}" data-id="{{id}}">
+                <td>{{id}}</td> <!-- 대분류 빈 셀 -->
+                <td></td> <!-- 대분류 빈 셀 -->
+                <td>{{name}}</td> <!-- 중분류 이름 -->
+                <td></td> <!-- 소분류 빈 셀 -->
+                <td>{{#isDisable}}<span class="badge bg-danger">No</span>{{/isDisable}}{{^isDisable}}<span class="badge bg-success">Yes</span>{{/isDisable}}</td>
+                <td>{{displayOrder}}</td>
+                <td>
+                    <a href="/admin/categories/edit/{{id}}" class="btn btn-warning btn-sm">수정</a>
+                    <form action="/admin/categories/delete/{{id}}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                    </form>
+                </td>
+            </tr>
+
+            <!-- 소분류 -->
+            {{#children}}
+                <tr class="category-row" data-category="low" data-parent-id="{{parentId}}">
+                    <td>{{id}}</td> <!-- 대분류 빈 셀 -->
+                    <td></td> <!-- 중분류 빈 셀 -->
+                    <td></td> <!-- 소분류 빈 셀 -->
+                    <td>{{name}}</td> <!-- 소분류 이름 -->
+                    <td>{{#isDisable}}<span class="badge bg-danger">No</span>{{/isDisable}}{{^isDisable}}<span class="badge bg-success">Yes</span>{{/isDisable}}</td>
+                    <td>{{displayOrder}}</td>
+                    <td>
+                        <a href="/admin/categories/edit/{{id}}" class="btn btn-warning btn-sm">수정</a>
+                        <form action="/admin/categories/delete/{{id}}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                        </form>
+                    </td>
+                </tr>
+            {{/children}}
+        {{/children}}
+
+    {{/categoryTree}}
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function filterCategories() {
+        const selectedId = document.getElementById("parentCategorySelect").value;
+        const rows = document.querySelectorAll(".category-row");
+
+        rows.forEach(row => {
+            const rowId = row.getAttribute('data-id');
+            const parentId = row.getAttribute('data-parent-id');
+
+            // 대분류는 parentId가 null (대분류는 선택된 id와 일치)
+            // 중분류/소분류는 상위 parentId가 선택된 id와 일치
+            if (selectedId === "" || rowId === selectedId || parentId === selectedId || isAncestorSelected(row, selectedId)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    // 상위 카테고리가 선택되었는지 확인하는 함수
+    function isAncestorSelected(row, selectedId) {
+        let parentId = row.getAttribute('data-parent-id');
+        while (parentId) {
+            const parentRow = document.querySelector(`.category-row[data-id="${parentId}"]`);
+            if (parentId === selectedId) {
+                return true;
+            }
+            if (!parentRow) {
+                break;
+            }
+            parentId = parentRow.getAttribute('data-parent-id');
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

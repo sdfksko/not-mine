@@ -1,0 +1,102 @@
+.footers {
+    background-color: #4C7263;
+    padding: 40px 20px;
+    color: white;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 2rem auto;
+
+}
+
+/* 로고 스타일 */
+.footer-container .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.footer-container .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* 링크 리스트 스타일 */
+.footer-container ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-container ul li {
+    margin-right: 30px;
+}
+
+.footer-container ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.footer-container ul li a:hover {
+    text-decoration: underline;
+}
+
+/* 소셜 아이콘 스타일 */
+.social-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.social-icons a {
+    color: white;
+    margin-left: 15px;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+/* 하단 문구 */
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.85em;
+    color: #ccc;
+}
+
+.footer hr {
+    border: none;
+    height: 1px;
+    background-color: #ffffff50;
+    margin: 20px 0;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-container ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-container ul li {
+        margin-bottom: 10px;
+    }
+
+    .social-icons {
+        margin-top: 20px;
+    }
+}

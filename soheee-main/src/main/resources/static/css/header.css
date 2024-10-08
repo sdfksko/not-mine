@@ -1,0 +1,263 @@
+/* 상위 클래스로 감싼 헤더 관련 CSS */
+.header-wrapper * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header-wrapper body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.header-wrapper .header-container {
+    width: 100%;
+    background-color: #4C7263;
+    color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-wrapper .header-content {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.header-wrapper .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-wrapper .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.header-wrapper .logo img {
+    height: 55px;
+}
+
+.header-wrapper .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.header-wrapper .category {
+    position: relative;
+    display: inline-block;
+}
+
+/* 사이드바와 하위 카테고리 스타일 */
+.header-wrapper .side-bar {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 100;
+}
+
+.header-wrapper .side-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header-wrapper .side-bar ul li {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    color: black;
+}
+
+.header-wrapper .side-bar ul li ul {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+}
+
+.header-wrapper .side-bar ul li:hover > ul {
+    display: block;
+}
+
+.header-wrapper .side-bar ul li a {
+    display: block;
+    padding: 10px;
+    color: black !important;
+    text-decoration: none;
+}
+
+.header-wrapper .side-bar ul li ul.middle-category,
+.header-wrapper .side-bar ul li ul.child-category {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.header-wrapper .side-bar ul li:hover > ul.middle-category {
+    display: block;
+}
+
+.header-wrapper .side-bar ul li ul li:hover > ul.child-category {
+    display: block;
+}
+
+.header-wrapper .category-btn {
+    background-color: #5D4037;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex-grow: 0;
+    margin-left: 15rem;
+    margin-right: 10px;
+}
+
+.header-wrapper .category-btn:hover {
+    background-color: #3E2723;
+}
+
+.header-wrapper .search-form {
+    position: relative;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.header-wrapper .search-form input[type="search"] {
+    width: 100%;
+    padding: 10px 50px 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+}
+
+.header-wrapper .search-form button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-wrapper .icon-menus {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-wrapper .icon-menus button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header-wrapper .icon-menus .notification-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+.header-wrapper .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.header-wrapper .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-width: 160px;
+    z-index: 1;
+}
+
+.header-wrapper .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.header-wrapper .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.header-wrapper .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.header-wrapper .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.header-wrapper .login {
+    background-color: #5D4037;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.header-wrapper .login:hover {
+    background-color: #3E2723;
+}
+
+.header-wrapper .header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px 10px 20px;
+    color: white;
+}
+
+.header-wrapper .header-location {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.header-wrapper .header-location i {
+    margin-right: 5px;
+}
+
+.header-wrapper .sub-menu {
+    display: flex;
+}
+
+.header-wrapper .sub-menu li {
+    margin-right: 20px;
+}
+
+.header-wrapper .sub-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.header-wrapper .sub-menu li a:hover {
+    text-decoration: underline;
+}

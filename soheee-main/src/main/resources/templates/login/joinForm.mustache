@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="/css/joinForm.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script defer src="/js/joinForm.js"></script>
+</head>
+<body>
+<main>
+    <div class="container">
+        <h1>회원가입</h1>
+        <div class="joinBox">
+            <div class="first-join">
+                <input type="text" id="userId" name="userId" placeholder="아이디" required>
+            </div>
+            <div class="second-join">
+                <input type="password" id="userPassword" name="userPassword" placeholder="비밀번호" required>
+            </div>
+            <div class="third-join">
+                <input type="text" id="username" name="username" placeholder="이 름" required>
+            </div>
+            <div class="fourth-join">
+                <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
+            </div>
+            <div class="fiveth-join">
+                <input type="email" id="email" name="email" placeholder="이메일"required>
+            </div>
+            <div class="sixth-join">
+                <input type="number" id="phoneNumber" name="phoneNumber" placeholder="휴대폰 번호 입력" required>
+            </div>
+            <div class="seventh-join">
+                <input type="number" id="sample6_postcode" name="postalAddress" placeholder="우편번호" required>
+                <span><button onclick="sample6_execDaumPostcode()">검색</button></span>
+            </div>
+            <div class="eighth-join">
+                <input type="text" id="sample6_address" name="address" placeholder="주소" required>
+            </div>
+            <div class="nineth-join">
+                <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+            </div>
+            <div class="tenth-join">
+                <input type="text" id="sample6_detailAddress" name="detailedAddress" placeholder="상세주소" required>
+            </div>
+            <button id="join-btn" class="join-button" type="submit">회원가입</button>
+            <img class="squirrel" src="/images/squirrel.png" alt="다람쥐">
+        </div>
+    </div>
+</main>
+</body>
+</html>

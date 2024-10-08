@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" type="text/css" href="/css/uploadForm.css">
+</head>
+<body>
+{{>layouts/header}}
+<div class="upload-form">
+    <form name="uploadForm" action="/items/upload" method="post" enctype="multipart/form-data" class="container">
+        <div class="title">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-title" name="title" id="title" />
+        </div>
+
+        <div class="category">
+            <label for="parentCategory">대분류 카테고리</label>
+            <select id="parentCategory" name="parentId">
+                <option value="">대분류 선택</option>
+                {{#parentCategories}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/parentCategories}}
+            </select>
+
+            <label for="middleCategory">중분류 카테고리</label>
+            <select id="middleCategory" name="middleId" disabled>
+                <option value="">중분류 선택</option>
+            </select>
+
+            <label for="childCategory">소분류 카테고리</label>
+            <select id="childCategory" name="categoryId" disabled>
+                <option value="">소분류 선택</option>
+            </select>
+        </div>
+        <br><br>
+
+        <div class="content">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-content" name="content" id="content"></textarea>
+        </div>
+
+        <div class="imageUrl">
+            <label for="file">이미지 파일</label><br>
+            <input type="file" id="file" name="images" onchange="previewImage(event)"  multiple>
+            <img id="imagePreview" style="max-width: 300px; display:none;" /><br><br>
+        </div>
+
+        <button type="submit">업로드</button>
+    </form>
+</div>
+
+{{#error}}
+    <p style="color:red;">{{errorMessage}}</p>
+{{/error}}
+
+{{>layouts/footer}}
+
+<!-- jQuery 및 업로드 폼 JavaScript 파일 호출 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/uploadForm.js"></script>
+</body>
+</html>

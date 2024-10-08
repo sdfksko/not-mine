@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>itemDetail</title>
+</head>
+{{>layouts/header}}
+<body>
+<h1>{{item.title}}</h1>
+<p>{{item.content}}</p>
+<img src="{{imagePath}}" alt="상품 이미지">
+<p>작성자: {{item.uploader.nickname}}</p>
+<p>조회수: {{item.boardHits}}</p>
+</body>
+{{>layouts/footer}}
+</html>
